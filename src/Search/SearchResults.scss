@@ -2,12 +2,118 @@
 // search results scss //
 /////////////////////////
 
+@import "./../Helpers/variables.scss";
+
+@-webkit-keyframes fadeInUp {
+  from {
+    transform: translate3d( 0, 40px, 0 )
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d( 0, 0, 0 );
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translate3d( 0, 40px, 0 )
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d( 0, 0, 0 );
+  }
+}
+
 .results {
+  display: grid;
+  grid-gap: $gutter;
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 
-  .search-result {
-    display: flex;
+  &.animate {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
   }
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (min-width: 1500px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .search-result {
+    background: white;
+    border: 2px solid #dedede;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $gutter;
+    overflow: hidden;
+
+    img {
+      height: auto;
+
+      &.portrait {
+        width: 100%;
+      }
+    }
+  }
+
+  .result-image-container {
+    align-items: center;
+    display: flex;
+    height: 300px;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .result-details-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: $gutter;
+  }
+
+  .tag-box {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .tag {
+      background: teal;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      margin: 0 10px 5px 0;
+      opacity: .6;
+      padding: 3px 6px;
+      text-transform: uppercase;
+
+      &:hover {
+        opacity: 1;
+        transition: opacity 250ms ease-in-out;
+      }
+    }
+  }
+
+
 }

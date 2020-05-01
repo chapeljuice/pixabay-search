@@ -18,7 +18,7 @@ class Search extends React.Component {
   }
 
   // react component lifecycle function
-  componentWillMount = () => {
+  componentDidMount = () => {
 
     // call to get search result data from Pixabay API
     this.getSearchResults();

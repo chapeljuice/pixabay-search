@@ -1,0 +1,13 @@
+/////////////////////////
+// search results scss //
+/////////////////////////
+
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .search-result {
+    display: flex;
+  }
+}

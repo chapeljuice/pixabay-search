@@ -9,8 +9,10 @@ class Search extends React.Component {
     super ( props );
     this.state = {
       isLoading: false,
+      savedItems: this.props.savedItems,
       searchCategory: '',
       searchData: [],
+      searchDetails: {},
       searchPage: 1,
       searchQuery: '',
       searchTotalResultCount: 0
@@ -38,8 +40,11 @@ class Search extends React.Component {
     // adds category to search if one is selected
     let chosenCategory = searchCategory ? `&category=${ searchCategory }` : '';
 
+    // how many items to display per page
+    const itemsPerPage = 10;
+
     // api request
-    fetch( `https://pixabay.com/api/?key=13136421-266c28a6d61717bc2e4e6a83e&q=${ searchQuery }&image_type=photo&page=${ fetchPage }&per_page=10${ chosenCategory }` )
+    fetch( `https://pixabay.com/api/?key=13136421-266c28a6d61717bc2e4e6a83e&q=${ searchQuery }&image_type=photo&page=${ fetchPage }&per_page=${ itemsPerPage }${ chosenCategory }` )
       .then( response => response.json() )
       .then( data => {
         console.log( 'Search result: ', data );
@@ -73,6 +78,12 @@ class Search extends React.Component {
     this.getSearchResults( this.state.searchQuery, category );
   }
 
+  // what to do when saved items change
+  handleSavedChanges = ( savedItems ) => {
+    console.log( 'Search/index.js savedItems: ', savedItems );
+    this.props.handleSavedChanges( savedItems );
+  }
+
   // render the component
   render () {
     return (
@@ -86,7 +97,10 @@ class Search extends React.Component {
               onSearchChange={ this.handleSearchChange }
               onCategoryChange={ this.handleCategoryChange } />
 
-            <SearchResults searchData={ this.state.searchData } />
+            <SearchResults
+              searchData={ this.state.searchData }
+              savedItems={ this.state.savedItems }
+              onSavedChanges={ this.handleSavedChanges } />
           </div>
 
         : <Loading /> }

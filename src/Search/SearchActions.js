@@ -27,8 +27,8 @@ class SearchActions extends React.Component {
 
   render () {
     return (
-      <form>
-        <div className="form-group">
+      <div className="form">
+        <div className="form-group search-input">
           <label htmlFor="imageSearch" className="visually-hidden">Search for images:</label>
           <DebounceInput
             minLength={2}
@@ -37,43 +37,42 @@ class SearchActions extends React.Component {
             id="imageSearch"
             className="search-input form-input"
             placeholder="Search for image by keywords..."
+            autoComplete="off"
             value={this.state.searchQuery}
             onChange={e => this.updateSearchQuery( e )}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="imageCategory" className="visually-hidden">
-            Update search category:
-            <select
-              id="imageCategory"
-              className="category-input form-input"
-              value={this.state.searchCategory}
-              onChange={e => this.updateSearchCategory( e )}>
-                <option value="">Category...</option>
-                <option value="animals">Animals</option>
-                <option value="backgrounds">Backgrounds</option>
-                <option value="buildings">Buildings</option>
-                <option value="business">Business</option>
-                <option value="computer">Computer</option>
-                <option value="education">Education</option>
-                <option value="fashion">Fashion</option>
-                <option value="feelings">Feelings</option>
-                <option value="food">Food</option>
-                <option value="health">Health</option>
-                <option value="industry">Industry</option>
-                <option value="music">Music</option>
-                <option value="nature">Nature</option>
-                <option value="people">People</option>
-                <option value="places">Places</option>
-                <option value="religion">Religion</option>
-                <option value="science">Science</option>
-                <option value="sports">Sports</option>
-                <option value="transportation">Transportation</option>
-                <option value="travel">Travel</option>
-            </select>
-          </label>
+        <div className="form-group search-dropdown">
+          <label htmlFor="imageCategory" className="visually-hidden">Update search category:</label>
+          <select
+            id="imageCategory"
+            className="category-input form-input"
+            value={this.state.searchCategory}
+            onChange={e => this.updateSearchCategory( e )}>
+              <option value="">Category...</option>
+              <option value="animals">Animals</option>
+              <option value="backgrounds">Backgrounds</option>
+              <option value="buildings">Buildings</option>
+              <option value="business">Business</option>
+              <option value="computer">Computer</option>
+              <option value="education">Education</option>
+              <option value="fashion">Fashion</option>
+              <option value="feelings">Feelings</option>
+              <option value="food">Food</option>
+              <option value="health">Health</option>
+              <option value="industry">Industry</option>
+              <option value="music">Music</option>
+              <option value="nature">Nature</option>
+              <option value="people">People</option>
+              <option value="places">Places</option>
+              <option value="religion">Religion</option>
+              <option value="science">Science</option>
+              <option value="sports">Sports</option>
+              <option value="transportation">Transportation</option>
+              <option value="travel">Travel</option>
+          </select>
         </div>
-      </form>
+      </div>
     )
   }
 }

@@ -31,6 +31,7 @@
   grid-gap: $gutter;
   list-style: none;
   margin: 0 auto;
+  max-width: 2500px;
   padding: 0;
 
   &.animate {
@@ -63,14 +64,18 @@
     border: 2px solid #dedede;
     display: flex;
     flex-direction: column;
-    margin-bottom: $gutter;
     overflow: hidden;
 
     img {
       height: auto;
+      transition: transform 450ms ease-out;
 
       &.portrait {
         width: 100%;
+      }
+
+      &:hover {
+        transform: scale( 1.1 );
       }
     }
   }
@@ -88,6 +93,13 @@
     display: flex;
     justify-content: space-between;
     padding: $gutter;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    justify-content: space-between;
   }
 
   .tag-box {
@@ -115,5 +127,11 @@
     }
   }
 
+  .social {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 120px;
+  }
 
 }

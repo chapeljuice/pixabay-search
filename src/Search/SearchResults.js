@@ -1,22 +1,26 @@
 import React from 'react';
 import SaveButton from './../Buttons/SaveButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import  './SearchResults.scss';
 
 class SearchResults extends React.Component {
   constructor ( props ) {
     super ( props );
     this.state = {
+      savedItems: this.props.savedItems
     }
   }
 
-
+  handleSavedChanges = ( savedItems ) => {
+    console.log( 'SearchResults.js savedItems: ', savedItems );
+    this.props.onSavedChanges( savedItems );
+  }
 
   render () {
-    // get saved items from local storage
-    let savedItems = JSON.parse( localStorage.getItem( 'savedItems' ) );
+    const { savedItems } = this.state;
 
     return (
-      <ul className="results">
+      <ul className="results animate">
         {
           this.props.searchData.map( result => {
             return (
@@ -30,7 +34,16 @@ class SearchResults extends React.Component {
                       return <li key={ tag } className="tag">{ tag.trim() }</li>
                     })}
                   </ul>
-                  <SaveButton id={ result.id } isSaved={ savedItems && savedItems.length > 0 && savedItems.includes( result.id.toString() ) ? true : false } />
+                  <div className="actions">
+                    <SaveButton
+                      id={ result.id }
+                      isSaved={ savedItems && savedItems.length > 0 && savedItems.includes( result.id.toString() ) ? true : false }
+                      handleSavedChanges={ this.handleSavedChanges } />
+                    <div className="social">
+                      <span><FontAwesomeIcon icon="thumbs-up" /> { result.likes }</span>
+                      <span><FontAwesomeIcon icon="star" /> { result.favorites }</span>
+                    </div>
+                  </div>
                 </aside>
               </li>
             )

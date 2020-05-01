@@ -50,6 +50,9 @@ class SaveButton extends React.Component {
       });
     }
 
+    // update state with newest changes
+    this.props.handleSavedChanges( savedItems );
+
     console.log( 'Saved in local storage: ', JSON.parse( localStorage.getItem( 'savedItems' ) ) );
   }
 

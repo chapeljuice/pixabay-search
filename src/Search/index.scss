@@ -11,10 +11,11 @@ body {
   font-family: $textFontFamily;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: $gutter;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: 'source-code-pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 button,

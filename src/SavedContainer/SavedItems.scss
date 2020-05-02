@@ -1,7 +1,18 @@
+//////////////////////
+// saved items scss //
+//////////////////////
 
+@import "./../Helpers/variables.scss";
 
 .saved-items-container {
   background: white;
+  padding: $gutter;
   position: fixed;
     bottom: 0;
+  width: 100%;
+
+  .saved-items-list {
+    list-style: none;
+    padding: 0;
+  }
 }

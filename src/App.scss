@@ -2,6 +2,11 @@
 // app scss //
 //////////////
 
+.section-title {
+  font-size: 24px;
+  margin: 0;
+}
+
 /* this class keeps elements accessible while not viewable to most users */
 .visually-hidden { 
   position: absolute !important;

@@ -10,6 +10,7 @@ class SavedItems extends React.Component {
 
     return (
       <div className={ `saved-items-container ${ savedItems && savedItems.length > 0 ? '' : 'empty' }` }>
+        <p className="section-title">Saved Items</p>
         {
           savedItems && savedItems.length > 0 ?
           <ul className="saved-items-list">

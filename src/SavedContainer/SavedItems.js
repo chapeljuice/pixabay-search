@@ -1,4 +1,5 @@
 import React from 'react';
+import Loading from './../Helpers/Loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import  './SavedItems.scss';
 
@@ -6,12 +7,17 @@ class SavedItems extends React.Component {
   constructor ( props ) {
     super ( props );
     this.state = {
-      savedItemsData: []
+      isLoading: false,
+      savedItemsData: [],
+      savedBoxOpen: false
     }
   }
 
   // this will get details for saved items
   getItemDetails = ( itemId ) => {
+    this.setState({
+      isLoading: true
+    });
     // make sure itemId is an integer
     const numberItemId = Number( itemId );
     // api request
@@ -20,7 +26,9 @@ class SavedItems extends React.Component {
       .then( response => response.json() )
       .then( data => {
         this.setState({
+          isLoading: false,
           savedItemsData: [ ...this.state.savedItemsData, data.hits[0] ],
+          savedBoxOpen: true
         });
       })
   }
@@ -50,35 +58,42 @@ class SavedItems extends React.Component {
     }
    }
 
+  toggleSavedBox = () => {
+    this.setState({
+      savedBoxOpen: !this.state.savedBoxOpen
+    });
+  }
+
   render () {
-    let { savedItemsData } = this.state;
+    let { isLoading, savedItemsData } = this.state;
 
     return (
       <div className={ `saved-items-container ${ savedItemsData && savedItemsData.length > 0 ? '' : 'empty' }` }>
-        <p className="section-title">Saved Items</p>
-        {
-          savedItemsData && savedItemsData.length > 0 ?
-          <ul className="saved-items-list">
+        <div className="saved-box-header" onClick={ () => this.toggleSavedBox() }>
+          <p className="section-title">Saved Items</p>
+          <FontAwesomeIcon icon={ this.state.savedBoxOpen ? 'caret-square-down' : 'caret-square-up' } size="lg" color="#09c" />
+        </div>
+          <ul className={`saved-items-list ${ this.state.savedBoxOpen ? 'open' : 'closed' }`}>
             {
-              savedItemsData.map( ( item, index ) => {
-                return (
-                  <li key={ item.id + index }>
-                    <a href={ item.pageURL } target="_blank" className="link" rel="noreferrer noopener">
-                      <div className="saved-image-box">
-                        <img src={ item.previewURL } alt={ item.tags } />
-                        <div className="hover-box">
-                          <FontAwesomeIcon icon="external-link-alt" className="icon" />
+              savedItemsData && savedItemsData.length > 0 ?
+                savedItemsData.map( ( item, index ) => {
+                  return (
+                    <li key={ item.id + index }>
+                      <a href={ item.pageURL } target="_blank" className="link" rel="noreferrer noopener">
+                        <div className="saved-image-box">
+                          <img src={ item.previewURL } alt={ item.tags } />
+                          <div className="hover-box">
+                            <FontAwesomeIcon icon="external-link-alt" className="icon" />
+                          </div>
                         </div>
-                      </div>
-                      <p>{ item.id }</p>
-                    </a>
-                  </li>
-                )
-              })
+                        <p>{ item.id }</p>
+                      </a>
+                    </li>
+                  )
+                })
+            :  isLoading ? <Loading /> : <p>No saved items</p>
             }
           </ul>
-          : <p>No saved items</p>
-        }
       </div>
     )
   }

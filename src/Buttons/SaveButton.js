@@ -12,7 +12,7 @@ class SaveButton extends React.Component {
   }
 
   toggleSave = ( value ) => {
-    console.log( 'value: ' + value );
+    console.log( 'SaveButton.js toggleSave value: ' + value );
     // first get any saved items from local storage
     let savedItems = JSON.parse( localStorage.getItem( 'savedItems' ) );
 
@@ -20,6 +20,7 @@ class SaveButton extends React.Component {
     if ( savedItems && savedItems.length > 0 ) {
       // now check to see if the value already exists.
       if ( savedItems.includes( value ) ) {
+        console.log( 'remove me from local storage' );
         // item already exists in local storage. let's remove it.
         let savedItemIndex = savedItems.indexOf( value );
         if ( savedItemIndex > -1 ) {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCircleNotch, faThumbsUp, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch, faExternalLinkAlt, faThumbsUp, faStar } from '@fortawesome/free-solid-svg-icons';
 import Search from './Search';
 import SavedItems from './SavedContainer/SavedItems';
 import './App.scss';
 
-library.add( faCircleNotch, faThumbsUp, faStar );
+library.add( faCircleNotch, faExternalLinkAlt, faThumbsUp, faStar );
 
 class App extends React.Component {
 

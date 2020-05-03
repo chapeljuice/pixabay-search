@@ -6,13 +6,68 @@
 
 .saved-items-container {
   background: white;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
   padding: $gutter;
   position: fixed;
     bottom: 0;
+    left: 0;
   width: 100%;
 
   .saved-items-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     list-style: none;
+    overflow-x: scroll;
     padding: 0;
+    width: calc(100% - #{$gutter * 2});
+
+    li {
+      cursor: pointer;
+      margin-right: $gutter;
+
+      a {
+        color: #069;
+        font-weight: bold;
+        text-decoration: none;
+
+        &:focus,
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      p {
+        margin: 5px 0;
+      }
+    }
+
+    .saved-image-box {
+      position: relative;
+
+      .hover-box {
+        background: rgba(0, 0, 0, .65);
+        height: calc(100% - 5px);
+        opacity: 0;
+        position: absolute;
+          top: 0;
+          left: 0;
+        width: 100%;
+
+        &:focus,
+        &:hover {
+          opacity: 1;
+          transition: opacity 250ms ease-in-out;
+        }
+
+        svg {
+          color: white;
+          position: absolute;
+            top: 50%;
+            left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
   }
 }

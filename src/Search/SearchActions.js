@@ -36,7 +36,7 @@ class SearchActions extends React.Component {
             type="text"
             id="imageSearch"
             className="search-input form-input"
-            placeholder="Search for image by keywords..."
+            placeholder="Search for image by keywords...default is 'scottish fold'"
             autoComplete="off"
             value={this.state.searchQuery}
             onChange={e => this.updateSearchQuery( e )}

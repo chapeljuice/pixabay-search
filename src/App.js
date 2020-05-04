@@ -1,11 +1,11 @@
 import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCaretSquareDown, faCaretSquareUp, faCircleNotch, faExternalLinkAlt, faThumbsUp, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faCaretSquareDown, faCaretSquareUp, faCircleNotch, faExternalLinkAlt, faThumbsUp, faTimes, faStar } from '@fortawesome/free-solid-svg-icons';
 import Search from './Search';
 import SavedItems from './SavedContainer/SavedItems';
 import './App.scss';
 
-library.add( faCaretSquareDown, faCaretSquareUp, faCircleNotch, faExternalLinkAlt, faThumbsUp, faStar );
+library.add( faCaretSquareDown, faCaretSquareUp, faCircleNotch, faExternalLinkAlt, faThumbsUp, faTimes, faStar );
 
 class App extends React.Component {
 
@@ -25,7 +25,6 @@ class App extends React.Component {
   getSavedItems = () => {
     // first get any saved items from local storage
     let savedItems = JSON.parse( localStorage.getItem( 'savedItems' ) );
-    console.log( 'these are the saved items: ', savedItems );
     // check to see if there are any saved items
     if ( savedItems && savedItems.length > 0 ) {
       // if there are, update state
@@ -36,8 +35,8 @@ class App extends React.Component {
     }
   } 
   
+  // this is where savedItems is lifted up to
   handleSavedChanges = ( savedItems ) => {
-    console.log( 'HEY IT WORKED' );
     this.setState({
       savedItems: savedItems
     })

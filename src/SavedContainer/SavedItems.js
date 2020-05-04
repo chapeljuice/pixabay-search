@@ -17,11 +17,11 @@ class SavedItems extends React.Component {
   getItemDetails = ( itemId ) => {
     this.setState({
       isLoading: true
-    });
+    });    
+
     // make sure itemId is an integer
     const numberItemId = Number( itemId );
     // api request
-    console.log( 'Fetching data for id: ' + itemId );
     fetch( `https://pixabay.com/api/?key=13136421-266c28a6d61717bc2e4e6a83e&id=${ numberItemId }`)
       .then( response => response.json() )
       .then( data => {

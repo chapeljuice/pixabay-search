@@ -2,9 +2,19 @@
 // app scss //
 //////////////
 
+.App {
+  padding-bottom: 200px; /* accounts for saved items container at bottom */
+}
+
 .section-title {
   font-size: 24px;
   margin: 0;
+}
+
+p.no-search-results {
+  font-size: 24px;
+  text-align: center;
+  padding-top: 50px;
 }
 
 /* this class keeps elements accessible while not viewable to most users */

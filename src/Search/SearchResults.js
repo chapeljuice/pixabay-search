@@ -7,13 +7,29 @@ class SearchResults extends React.Component {
   constructor ( props ) {
     super ( props );
     this.state = {
-      savedItems: this.props.savedItems
+      savedItems: this.props.savedItems,
+      showModal: false,
+      imageInModal: '',
+      tagsInModal: ''
     }
   }
 
   handleSavedChanges = ( savedItems ) => {
-    console.log( 'SearchResults.js savedItems: ', savedItems );
     this.props.onSavedChanges( savedItems );
+  }
+
+  showInModal = ( image, tags ) => {
+    this.setState({
+      showModal: true,
+      imageInModal: image,
+      tagsInModal: tags
+    })
+  }
+
+  closeModal = () => {
+    this.setState({
+      showModal: false
+    })
   }
 
   render () {
@@ -25,7 +41,7 @@ class SearchResults extends React.Component {
           this.props.searchData.map( result => {
             return (
               <li key={result.id} className="search-result">
-                <div className="result-image-container">
+                <div className="result-image-container" onClick={() => this.showInModal( result.webformatURL, `${ result.tags } by ${ result.user }` )}>
                   <img src={ result.webformatURL } alt={`${ result.tags } by ${ result.user }`} className={ result.imageHeight > result.imageWidth ? 'portrait' : 'landscape' } />
                 </div>
                 <aside className="result-details-container">
@@ -49,6 +65,14 @@ class SearchResults extends React.Component {
             )
           })
         }
+        <div className={`modal ${ this.state.showModal ? 'show' : '' }`} id="modal-box" onClick={() => this.closeModal()}>
+          <div id="modalContent" className="modal-content">
+            <div className="modal-image-box">
+              <div id="closeModal" className="close-modal" onClick={() => this.closeModal()}><FontAwesomeIcon icon="times" size="lg" /></div>
+              <img src={ this.state.imageInModal } alt={ this.state.tagsInModal } />
+            </div>
+          </div>
+        </div>
       </ul>
     )
   }

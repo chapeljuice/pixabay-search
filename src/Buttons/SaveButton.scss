@@ -8,6 +8,7 @@
   background: #09c;
   border: none;
   border-radius: $border-radius;
+  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.2), -12px -12px 24px 0 rgba(255, 255, 255, 0.8);
   color: white;
   cursor: pointer;
   font-size: 14px;
@@ -20,7 +21,8 @@
   &:focus,
   &:hover {
     background: #069;
-    transform: scale( 1.1 );
+    box-shadow: none;
+    transform: scale( 1.05 );
   }
 
   &.saved {

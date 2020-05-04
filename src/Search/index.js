@@ -21,7 +21,6 @@ class Search extends React.Component {
 
   // react component lifecycle function
   componentDidMount = () => {
-
     // call to get search result data from Pixabay API
     this.getSearchResults();
   }
@@ -47,8 +46,8 @@ class Search extends React.Component {
     fetch( `https://pixabay.com/api/?key=13136421-266c28a6d61717bc2e4e6a83e&q=${ searchQuery }&image_type=photo&page=${ fetchPage }&per_page=${ itemsPerPage }${ chosenCategory }` )
       .then( response => response.json() )
       .then( data => {
-        console.log( 'Search result: ', data );
 
+        // check to see if there are any results
         this.setState({
           isLoading: false,
           searchCategory: searchCategory,
@@ -56,13 +55,12 @@ class Search extends React.Component {
           searchPage: fetchPage,
           searchTotalResultCount: data.total,
           searchQuery: searchQuery,
-        }, () => {
-          console.log( 'this.state.searchData: ', this.state.searchData );
         });
       })
       .catch( error => {
         console.log( 'Search result error: ', error );
         this.setState({
+          searchData: [],
           isLoading: false
         });
       });
@@ -80,30 +78,34 @@ class Search extends React.Component {
 
   // what to do when saved items change
   handleSavedChanges = ( savedItems ) => {
-    console.log( 'Search/index.js savedItems: ', savedItems );
     this.props.handleSavedChanges( savedItems );
   }
 
   // render the component
   render () {
+    const {
+      isLoading,
+      savedItems,
+      searchCategory,
+      searchData,
+      searchQuery
+    } = this.state;
+
     return (
       <div>
-        { this.state.searchData ? 
-        
-          <div>
-            <SearchActions
-              category={ this.state.searchCategory }
-              query={ this.state.searchQuery }
-              onSearchChange={ this.handleSearchChange }
-              onCategoryChange={ this.handleCategoryChange } />
-
+          <SearchActions
+            category={ searchCategory }
+            query={ searchQuery }
+            onSearchChange={ this.handleSearchChange }
+            onCategoryChange={ this.handleCategoryChange } />
+        {
+          searchData && searchData.length > 0 ? 
             <SearchResults
-              searchData={ this.state.searchData }
-              savedItems={ this.state.savedItems }
+              searchData={ searchData }
+              savedItems={ savedItems }
               onSavedChanges={ this.handleSavedChanges } />
-          </div>
-
-        : <Loading /> }
+          : isLoading ? <Loading /> : <p className="no-search-results">{`No results for "${ searchQuery }" in the ${ searchCategory } category.`}</p>
+        }
       </div>
     )
   }

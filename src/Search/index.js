@@ -92,7 +92,7 @@ class Search extends React.Component {
     } = this.state;
 
     return (
-      <div>
+      <div className="main-content">
           <SearchActions
             category={ searchCategory }
             query={ searchQuery }

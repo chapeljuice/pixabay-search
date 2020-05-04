@@ -26,3 +26,10 @@ ul,
 span {
   font-family: $textFontFamily;
 }
+
+.main-content > .loading {
+  font-size: 96px;
+  margin-top: 15vh;
+  opacity: .3;
+  text-align: center;
+}
